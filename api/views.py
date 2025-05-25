@@ -7,7 +7,15 @@ from django.http import HttpResponse
 from .models import User
 
 class Users(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
-    """"""
+    """
+
+    GET /manipulating/users/ → lista todos os usuários com a conta relacionada
+    GET /manipulating/users/<int:id> → lista o usuário pelo id selecionado
+    POST /manipulating/users/ → cria um novo usuário
+    PUT /manipulating/users/ → atualiza um usuário
+    DELETE /manipulating/users/<int:id> → deleta um usuário
+
+    """
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
