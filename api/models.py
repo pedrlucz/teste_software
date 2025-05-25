@@ -9,7 +9,7 @@ class Base(models.Model):
     abstract = True
 
 class User(Base):
-    cpf = models.Charfield(max_length=13)
+    cpf = models.CharField(max_length=13)
     name = models.CharField(max_length=100, blank = True)
     age = models.CharField(max_length=3, null=True)
     phone = models.CharField(max_length=25, null=True)
