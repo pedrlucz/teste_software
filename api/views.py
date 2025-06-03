@@ -38,7 +38,7 @@ class Users(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAP
         except Exception as e:
             return Response({'saved': f'Não foi possível salvar no banco de dados? {e}'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response('Novo usuário salvo!', status = 200)
+        return Response({'detail': f'{name} foi salvo!'}, status = 200)
 
     def put(self, request, id):
         payload = request.data
@@ -47,7 +47,7 @@ class Users(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAP
         age = payload.get('age')
 
         user = get_object_or_404(User, id = id)
-
+        name = user.name
         try: 
             user.phone = phone
             user.age = age 
@@ -57,7 +57,7 @@ class Users(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAP
         except Exception as e:
             return Response({'saved': f'Não foi possível salvar no banco de dados? {e}'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response('Usuário atualizado!', status = 200)
+        return Response({'detail': f'{name} atualizado!'}, status = 200)
 
     def get(self, request, id = None):
         if id is not None:
